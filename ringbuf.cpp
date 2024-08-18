@@ -3,27 +3,27 @@
      *@author     ZW
      *@version    V1.0
      *@date       2024.08.18
-     *@brief      »·ĞÎ»º³åÇø
+     *@brief      ç¯å½¢ç¼“å†²åŒº
 	 *@note       None
 ***************************************/
 
 #include "stdio.h"
 //#include "ringbuf.h"
 
-typedef  unsigned int      uint16_t;             //·Åµ½KeilÊ±²»ÓÃĞ´ÕâÁ½ĞĞ 
-typedef  unsigned char     uint8_t;
+typedef  unsigned short int      uint16_t;             //æ”¾åˆ°Keilæ—¶ä¸ç”¨å†™è¿™ä¸¤è¡Œ 
+typedef  unsigned char           uint8_t;
 
 typedef struct
 {
-	uint8_t     *buffer;                       //Êı¾İ»º³åÇøµÄÊ×µØÖ· 
-	uint16_t     size;                        //Êı¾İ»º³åÇøµÄ´óĞ¡     Á½Õß½áºÏµÈ¼ÛÓÚbuffer[size] 
-	uint16_t     in;                         //ÒªĞ´ÈëÎ»ÖÃµÄÖ¸Õë 
-	uint16_t     out;                       //Òª¶ÁÈ¡Î»ÖÃµÄÖ¸Õë       ´ËÖ¸Õë·ÇÕæÕıµÄÖ¸Õë£¬Ö»ÊÇ¼ÇÂ¼Õâ¸öÎ»ÖÃµÄ±êÊ¶·û 
+	uint8_t     *buffer;                       //æ•°æ®ç¼“å†²åŒºçš„é¦–åœ°å€ 
+	uint16_t     size;                        //æ•°æ®ç¼“å†²åŒºçš„å¤§å°     ä¸¤è€…ç»“åˆç­‰ä»·äºbuffer[size] 
+	uint16_t     in;                         //è¦å†™å…¥ä½ç½®çš„æŒ‡é’ˆ 
+	uint16_t     out;                       //è¦è¯»å–ä½ç½®çš„æŒ‡é’ˆ       æ­¤æŒ‡é’ˆéçœŸæ­£çš„æŒ‡é’ˆï¼Œåªæ˜¯è®°å½•è¿™ä¸ªä½ç½®çš„æ ‡è¯†ç¬¦ 
 }CricularBuffer; 
 
 /**************************************
-     *@brief     ³õÊ¼»¯»·ĞÎ»º³åÇø 
-	 *@param     fifo£º»º³åÇøÊµÀı  buffer:fifoµÄ»º³åÇø size£º»º³åÇø´óĞ¡ 
+     *@brief     åˆå§‹åŒ–ç¯å½¢ç¼“å†²åŒº 
+	 *@param     fifoï¼šç¼“å†²åŒºå®ä¾‹  buffer:fifoçš„ç¼“å†²åŒº sizeï¼šç¼“å†²åŒºå¤§å° 
 	 *@note      None
 	 *@retval    None 
 ***************************************/
@@ -36,10 +36,10 @@ void InitBuffer(CricularBuffer *fifo,uint8_t *buffer,uint16_t size)
 }
 
 /**************************************
-     *@brief     ÅĞ¶Ïfifo»º³åÇøÊÇ·ñÎª¿Õ 
-	 *@param     fifo£º»º³åÇøÊµÀı 
+     *@brief     åˆ¤æ–­fifoç¼“å†²åŒºæ˜¯å¦ä¸ºç©º 
+	 *@param     fifoï¼šç¼“å†²åŒºå®ä¾‹ 
 	 *@note      None
-	 *@retval    1Îª¿Õ 0²»Îª¿Õ£¨ÓĞÊı¾İ£© 
+	 *@retval    1ä¸ºç©º 0ä¸ä¸ºç©ºï¼ˆæœ‰æ•°æ®ï¼‰ 
 ***************************************/
 bool  RingBuffer_IsEmpty(CricularBuffer *fifo)
 {
@@ -47,10 +47,10 @@ bool  RingBuffer_IsEmpty(CricularBuffer *fifo)
 }
 
 /**************************************
-     *@brief     ÅĞ¶Ïfifo»º³åÇøÊÇ·ñÎªÂú 
-	 *@param     fifo£º»º³åÇøÊµÀı 
+     *@brief     åˆ¤æ–­fifoç¼“å†²åŒºæ˜¯å¦ä¸ºæ»¡ 
+	 *@param     fifoï¼šç¼“å†²åŒºå®ä¾‹ 
 	 *@note      None
-	 *@retval    1ÎªÂú 0²»ÎªÂú 
+	 *@retval    1ä¸ºæ»¡ 0ä¸ä¸ºæ»¡ 
 ***************************************/
 bool  RingBuffer_IsFull(CricularBuffer *fifo)
 {
@@ -58,10 +58,10 @@ bool  RingBuffer_IsFull(CricularBuffer *fifo)
 }
 
 /**************************************
-     *@brief     »ñÈ¡ÒÑÊ¹ÓÃµÄ¿Õ¼ä 
-	 *@param     fifo£º»º³åÇøÊµÀı 
+     *@brief     è·å–å·²ä½¿ç”¨çš„ç©ºé—´ 
+	 *@param     fifoï¼šç¼“å†²åŒºå®ä¾‹ 
 	 *@note      None
-	 *@retval    ÒÑÊ¹ÓÃ¸öÊı 
+	 *@retval    å·²ä½¿ç”¨ä¸ªæ•° 
 ***************************************/
 uint16_t  RingBuffer_GetUsedSize(CricularBuffer *fifo)
 {
@@ -76,10 +76,10 @@ uint16_t  RingBuffer_GetUsedSize(CricularBuffer *fifo)
 }
 
 /**************************************
-     *@brief     »ñÈ¡Î´Ê¹ÓÃµÄ¿Õ¼ä 
-	 *@param     fifo£º»º³åÇøÊµÀı 
+     *@brief     è·å–æœªä½¿ç”¨çš„ç©ºé—´ 
+	 *@param     fifoï¼šç¼“å†²åŒºå®ä¾‹ 
 	 *@note      None
-	 *@retval    Î´Ê¹ÓÃ¸öÊı 
+	 *@retval    æœªä½¿ç”¨ä¸ªæ•° 
 ***************************************/
 uint16_t  RingBuffer_GetAvailableSize(CricularBuffer *fifo)
 {
@@ -87,8 +87,8 @@ uint16_t  RingBuffer_GetAvailableSize(CricularBuffer *fifo)
 }
 
 /**************************************
-  * @brief  ·¢ËÍÊı¾İµ½»·ĞÎ»º³åÇø£¨²»¼ì²âÊ£Óà¿Õ¼ä£©
-  * @param  fifo: ÊµÀı
+  * @brief  å‘é€æ•°æ®åˆ°ç¯å½¢ç¼“å†²åŒºï¼ˆä¸æ£€æµ‹å‰©ä½™ç©ºé—´ï¼‰
+  * @param  fifo: å®ä¾‹
   * @param  data: &#&
   * @param  len: &#&
   * @retval none
@@ -104,15 +104,15 @@ void RingBuffer_In(CricularBuffer *fifo,uint8_t *data,uint16_t len)
 } 
 
 /**************************************
-  * @brief  ·¢ËÍÊı¾İµ½»·ĞÎ»º³åÇø(´øÊ£Óà¿Õ¼ä¼ì²â£¬¿Õ¼ä²»×ã·¢ËÍÊ§°Ü)
-  * @param  fifo: ÊµÀı
+  * @brief  å‘é€æ•°æ®åˆ°ç¯å½¢ç¼“å†²åŒº(å¸¦å‰©ä½™ç©ºé—´æ£€æµ‹ï¼Œç©ºé—´ä¸è¶³å‘é€å¤±è´¥)
+  * @param  fifo: å®ä¾‹
   * @param  data: &#&
   * @param  len: &#&
-  * @retval uint8_t: 0 ³É¹¦ 1Ê§°Ü£¨¿Õ¼ä²»×ã£©
+  * @retval uint8_t: 0 æˆåŠŸ 1å¤±è´¥ï¼ˆç©ºé—´ä¸è¶³ï¼‰
 ***************************************/
 uint8_t RingBuffer_In_Check(CricularBuffer *fifo,uint8_t *data,uint16_t len)
 {
-	if(RingBuffer_IsFull(fifo)==1)                        //ÕâÀïÒª×¢Òâº¯Êı¸³Öµ²»¿É¼Ó& 
+	if(RingBuffer_IsFull(fifo)==1)                        //è¿™é‡Œè¦æ³¨æ„å‡½æ•°èµ‹å€¼ä¸å¯åŠ & 
 	{
 		return 1;
 	}
@@ -123,17 +123,17 @@ uint8_t RingBuffer_In_Check(CricularBuffer *fifo,uint8_t *data,uint16_t len)
 }
 
 /**************************************
-  * @brief  ´Ó»·ĞÎ»º³åÇø¶ÁÈ¡Êı¾İ
-  * @param  fifo: ÊµÀı
-  * @param  buf: ´æ·ÅÊı×é
-  * @param  len: ´æ·ÅÊı×é³¤¶È
-  * @retval uint16_t: Êµ¼Ê¶ÁÈ¡¸öÊı
+  * @brief  ä»ç¯å½¢ç¼“å†²åŒºè¯»å–æ•°æ®
+  * @param  fifo: å®ä¾‹
+  * @param  buf: å­˜æ”¾æ•°ç»„
+  * @param  len: å­˜æ”¾æ•°ç»„é•¿åº¦
+  * @retval uint16_t: å®é™…è¯»å–ä¸ªæ•°
 ***************************************/
 uint16_t RingBuffer_Out(CricularBuffer *fifo,uint8_t *buf,uint16_t len) 
 {
 	uint16_t AvailableData = RingBuffer_GetUsedSize(fifo);
 	
-	if(AvailableData == 0)                                       //´ËÅĞ¶ÏÎªÅĞ¶ÏÊÇ·ñ»·ĞÎ»º³åÇøÎª¿Õ£¬¿ÉÓÃº¯ÊıRingBuffer_IsEmptyÌæ´ú 
+	if(AvailableData == 0)                                       //æ­¤åˆ¤æ–­ä¸ºåˆ¤æ–­æ˜¯å¦ç¯å½¢ç¼“å†²åŒºä¸ºç©ºï¼Œå¯ç”¨å‡½æ•°RingBuffer_IsEmptyæ›¿ä»£ 
 	{
 		return AvailableData;
 	}
